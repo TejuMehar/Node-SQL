@@ -9,15 +9,10 @@ const connection = mysql.createConnection({
   port: 3307           
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL:", err);
-    return;
-  }
-  console.log("Connected to MySQL Database!");
-});
 
-connection.query('SHOW TABLES', (err, results) => {
+
+try{
+ connection.query('SHOW TABLES', (err, results) => {
   if (err) {
     console.error("Error executing query:", err);
     return;
@@ -26,6 +21,11 @@ connection.query('SHOW TABLES', (err, results) => {
     connection.end();
 }
 );
+}catch(err){
+  console.error("Error during database operation:", err);
+}
+
+
 
 // let getRandomUser = ()=> {
 //   return {
