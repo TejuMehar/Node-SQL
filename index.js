@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
+const fs = require('fs');
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -9,10 +10,10 @@ const connection = mysql.createConnection({
   port: 3307           
 });
 
-
+const schema = fs.readFileSync('schema.sql', 'utf-8');
 
 try{
- connection.query('SHOW TABLES', (err, results) => {
+ connection.query("SHOW TABLES", (err, results) => {
   if (err) {
     console.error("Error executing query:", err);
     return;
