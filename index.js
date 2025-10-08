@@ -12,8 +12,11 @@ const connection = mysql.createConnection({
 
 const schema = fs.readFileSync('schema.sql', 'utf-8');
 
+let q = "INSERT INTO users (username, email, password) VALUES (?,?,?,?)";
+let user = ["123","123_newuser","123@gmail.com","123"]
+
 try{
- connection.query("SHOW TABLES", (err, results) => {
+ connection.query(q,user,(err, results) => {
   if (err) {
     console.error("Error executing query:", err);
     return;
