@@ -12,17 +12,27 @@ const connection = mysql.createConnection({
 
 const schema = fs.readFileSync('schema.sql', 'utf-8');
 
-//Inserting a New Data
-let q = "INSERT INTO users (username, email, password) VALUES ?";
-let users = [
-  ["123_newuserb","123@gmail.comb","123b"],
-  ["123_newuserc","123@gmail.comc","123c"],
-  ["123_newuserd","123@gmail.comd","123d"]
+let getRandomUser = ()=> {
+  return [
+   faker.internet.username(),
+   faker.internet.email(),
+   faker.internet.password()
+  ];
+}
 
-];
+
+//Inserting a New Data
+let q = "INSERT INTO users (username,email,password) VALUES ?";
+
+let data = [];
+
+
+for(let i=0;i<100;i++){
+data.push(getRandomUser());
+}
 
 try{
- connection.query(q,[users],(err, results) => {
+ connection.query(q,[data],(err, results) => {
   if (err) {
     console.error("Error executing query:", err);
     return;
@@ -37,13 +47,6 @@ try{
 
 
 
-// let getRandomUser = ()=> {
-//   return {
-//     id: faker.string.uuid(),
-//     username: faker.internet.username(),
-//     email: faker.internet.email(),
-//     password: faker.internet.password()
-//   };
-// }
+
 
 //     console.log(getRandomUser());
