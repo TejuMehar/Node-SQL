@@ -44,9 +44,3 @@ try{
 }catch(err){
   console.error("Error during database operation:", err);
 }
-
-
-
-
-
-//     console.log(getRandomUser());
